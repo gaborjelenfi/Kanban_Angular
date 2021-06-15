@@ -1,40 +1,106 @@
 @import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
 
+
+.page {
+  background: linear-gradient(to bottom right, #00223e, #ffa17f);
+  height: 100%;
+}
+
 .container {
   width: 300px;
   max-width: 100%;
-  margin: 25px 12.5px;
+  margin: 25px 1px;
+  padding: 0;
   display: inline-block;
   vertical-align: top;
 }
 
+.container__title {
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  padding: 10px;
+}
+
+mat-label {
+  color: #fff;
+}
+
+mat-form-field {
+  width: 100%;
+  padding: 10px;
+}
+
+textarea {
+  color: #fff;
+  width: 100%;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  margin-left: 30px;
+}
+
+.priority__radio--title {
+  text-align: center;
+  color: #fff;
+}
+
+mat-radio-button {
+  margin-bottom: 10px;
+}
+
+.priority__radio--high {
+  color: #e01c26;
+}
+
+.priority__radio--med {
+  color: #f88e36;
+}
+
+.priority__radio--low {
+  color: #75dd44;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+
 .list {
-  border: solid 1px #ccc;
+  height: 90%;
+  border: solid 1px #474747;
   min-height: 60px;
-  background: white;
+  background: linear-gradient(to bottom right, #00223e5e, #ffa17f5e);
   border-radius: 4px;
-  overflow: hidden;
+  overflow: auto;
   display: block;
 }
 
 .box {
-  height: 100px;
+  margin: 20px;
+  height: 5rem;
+  max-height: 100px;
   padding: 20px 10px;
-  border-bottom: solid 1px #ccc;
+  border: solid 2px #ccc;
+  border-radius: 10px;
   color: rgba(0, 0, 0, 0.87);
   display: flex;
-  flex-direction: row;
+  flex-direction: co;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
   cursor: move;
-  background: white;
+  background: #fff;
   font-size: 14px;
 }
 
 .cdk-drag-preview {
   box-sizing: border-box;
-  border-radius: 4px;
+  border-radius: 10px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
     0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
@@ -47,10 +113,18 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.box:last-child {
-  border: none;
-}
-
 .list.cdk-drop-list-dragging .box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.high {
+  border-color: #e01c26;
+}
+
+.med {
+  border-color: #f88e36;
+}
+
+.low {
+  border-color: #75dd44;
 }

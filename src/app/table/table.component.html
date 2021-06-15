@@ -1,6 +1,35 @@
-<div cdkDropListGroup class="d-flex justify-content-center">
+<div cdkDropListGroup class="d-flex justify-content-center page">
   <div class="container">
-    <h2>Backlog</h2>
+    <h2 class="container__title">Control</h2>
+
+    <div class="list">
+      <form (ngSubmit)="onSubmit()" #controlForm="ngForm">
+        <mat-form-field>
+          <mat-label>Task</mat-label>
+          <textarea type="text" matInput placeholder="write your task here"></textarea>
+        </mat-form-field>
+        <h3 class="priority__radio--title">Priority</h3>
+        <mat-radio-group class="radio-group" [(ngModel)]="radio" name="radio" #low="ngModel">
+          <mat-radio-button value="high" class="priority__radio--high">
+            High
+          </mat-radio-button>
+          <mat-radio-button value="med" class="priority__radio--med">
+            Medium
+          </mat-radio-button>
+          <mat-radio-button value="low" class="priority__radio--low">
+            Low
+          </mat-radio-button>
+        </mat-radio-group>
+        <div class="button-group">
+          <button mat-raised-button color="accent" type="submit">Add</button>
+          <button mat-raised-button color="warn" type="reset" (click)="onReset()">Reset</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2 class="container__title">Backlog</h2>
 
     <div
       cdkDropList
@@ -8,12 +37,23 @@
       class="list"
       (cdkDropListDropped)="drop($event)"
     >
-      <div class="box" *ngFor="let item of backLog" cdkDrag>{{ item }}</div>
+      <div
+        class="box"
+        *ngFor="let item of backLog"
+        [ngClass]="{
+          high: item.priority === 'high',
+          med: item.priority === 'med',
+          low: item.priority === 'low'
+        }"
+        cdkDrag
+      >
+        {{ item.task }}
+      </div>
     </div>
   </div>
 
   <div class="container">
-    <h2>In progress</h2>
+    <h2 class="container__title">In progress</h2>
 
     <div
       cdkDropList
@@ -21,12 +61,23 @@
       class="list"
       (cdkDropListDropped)="drop($event)"
     >
-      <div class="box" *ngFor="let item of inProgress" cdkDrag>{{ item }}</div>
+      <div
+        class="box"
+        *ngFor="let item of inProgress"
+        [ngClass]="{
+          high: item.priority === 'high',
+          med: item.priority === 'med',
+          low: item.priority === 'low'
+        }"
+        cdkDrag
+      >
+        {{ item.task }}
+      </div>
     </div>
   </div>
 
   <div class="container">
-    <h2>Code review</h2>
+    <h2 class="container__title">Code review</h2>
 
     <div
       cdkDropList
@@ -34,12 +85,23 @@
       class="list"
       (cdkDropListDropped)="drop($event)"
     >
-      <div class="box" *ngFor="let item of codeReview" cdkDrag>{{ item }}</div>
+      <div
+        class="box"
+        *ngFor="let item of codeReview"
+        [ngClass]="{
+          high: item.priority === 'high',
+          med: item.priority === 'med',
+          low: item.priority === 'low'
+        }"
+        cdkDrag
+      >
+        {{ item.task }}
+      </div>
     </div>
   </div>
 
   <div class="container">
-    <h2>In test</h2>
+    <h2 class="container__title">In test</h2>
 
     <div
       cdkDropList
@@ -47,12 +109,23 @@
       class="list"
       (cdkDropListDropped)="drop($event)"
     >
-      <div class="box" *ngFor="let item of inTest" cdkDrag>{{ item }}</div>
+      <div
+        class="box"
+        *ngFor="let item of inTest"
+        [ngClass]="{
+          high: item.priority === 'high',
+          med: item.priority === 'med',
+          low: item.priority === 'low'
+        }"
+        cdkDrag
+      >
+        {{ item.task }}
+      </div>
     </div>
   </div>
 
   <div class="container">
-    <h2>Done</h2>
+    <h2 class="container__title">Done</h2>
 
     <div
       cdkDropList
@@ -60,7 +133,18 @@
       class="list"
       (cdkDropListDropped)="drop($event)"
     >
-      <div class="box" *ngFor="let item of done" cdkDrag>{{ item }}</div>
+      <div
+        class="box"
+        *ngFor="let item of done"
+        [ngClass]="{
+          high: item.priority === 'high',
+          med: item.priority === 'med',
+          low: item.priority === 'low'
+        }"
+        cdkDrag
+      >
+        {{ item.task }}
+      </div>
     </div>
   </div>
 </div>

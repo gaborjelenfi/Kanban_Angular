@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import {
   CdkDragDrop,
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-table',
@@ -12,11 +13,14 @@ import {
   styleUrls: ['./table.component.css'],
 })
 export class TableComponent implements OnInit {
-  backLog = ['Task 1', 'Task 2', 'Task 3', 'Task 4'];
-  inProgress = ['Task 5', 'Task 6'];
-  codeReview = ['Task 7'];
-  inTest = ['Task 8', 'Task 9', 'Task 10'];
-  done = ['Task 11', 'Task 12'];
+  @ViewChild('controlForm', {static: false}) controlForm: NgForm;
+  radio: null;
+
+  backLog = [{task:'Task 1', priority:'high'}, {task:'Task 2', priority:'med'}, {task:'Task 3', priority:'low'}];
+  inProgress = [{task:'Task 5', priority:'high'}, {task:'Task 6', priority:'high'}];
+  codeReview = [{task:'Task 7', priority:'low'}];
+  inTest = [{task:'Task 8', priority:'low'}, {task:'Task 9', priority:'med'}, {task:'Task 10', priority:'med'}];
+  done = [];
 
   constructor() {}
 
@@ -37,5 +41,14 @@ export class TableComponent implements OnInit {
         event.currentIndex,
       );
     }
+  }
+
+  onSubmit() {
+
+  }
+
+  onReset() {
+    this.radio = null;
+    this.controlForm.resetForm();
   }
 }
