@@ -6,10 +6,24 @@
       <form (ngSubmit)="onSubmit()" #controlForm="ngForm">
         <mat-form-field>
           <mat-label>Task</mat-label>
-          <textarea type="text" matInput placeholder="write your task here"></textarea>
+          <textarea
+            type="text"
+            matInput
+            placeholder="write your task here"
+            [(ngModel)]="textarea"
+            #task="ngModel"
+            name="task"
+            required
+          ></textarea>
         </mat-form-field>
         <h3 class="priority__radio--title">Priority</h3>
-        <mat-radio-group class="radio-group" [(ngModel)]="radio" name="radio" #low="ngModel">
+        <mat-radio-group
+          class="radio-group"
+          [(ngModel)]="radio"
+          name="priority"
+          #priority="ngModel"
+          required
+        >
           <mat-radio-button value="high" class="priority__radio--high">
             High
           </mat-radio-button>
@@ -21,10 +35,37 @@
           </mat-radio-button>
         </mat-radio-group>
         <div class="button-group">
-          <button mat-raised-button color="accent" type="submit">Add</button>
-          <button mat-raised-button color="warn" type="reset" (click)="onReset()">Reset</button>
+          <button
+            mat-raised-button
+            color="accent"
+            type="submit"
+            [disabled]="!controlForm.valid"
+          >
+            {{ isEditMode ? 'Save' : 'Add' }}
+          </button>
+          <button
+            mat-raised-button
+            color="warn"
+            type="reset"
+            (click)="onReset()"
+          >
+            {{ isEditMode ? 'Cancel' : 'Reset' }}
+          </button>
         </div>
       </form>
+      <p class="hint">(hint: click on item to edit)</p>
+      <div
+        class="trash__container"
+        cdkDropList
+        [cdkDropListData]="trash"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div *ngIf="isDragging" class="trash__container--list">
+          <span *ngIf="isDragging" class="trash__text">
+            Drop here to Delete
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -39,13 +80,16 @@
     >
       <div
         class="box"
-        *ngFor="let item of backLog"
+        *ngFor="let item of backLog; let i = index"
         [ngClass]="{
           high: item.priority === 'high',
           med: item.priority === 'med',
           low: item.priority === 'low'
         }"
         cdkDrag
+        (cdkDragStarted)="dragging()"
+        (cdkDragReleased)="released()"
+        (click)="onEdit('backLog', item, i)"
       >
         {{ item.task }}
       </div>
@@ -63,13 +107,16 @@
     >
       <div
         class="box"
-        *ngFor="let item of inProgress"
+        *ngFor="let item of inProgress; let i = index"
         [ngClass]="{
           high: item.priority === 'high',
           med: item.priority === 'med',
           low: item.priority === 'low'
         }"
         cdkDrag
+        (cdkDragStarted)="dragging()"
+        (cdkDragReleased)="released()"
+        (click)="onEdit('inProgress', item, i)"
       >
         {{ item.task }}
       </div>
@@ -87,13 +134,16 @@
     >
       <div
         class="box"
-        *ngFor="let item of codeReview"
+        *ngFor="let item of codeReview; let i = index"
         [ngClass]="{
           high: item.priority === 'high',
           med: item.priority === 'med',
           low: item.priority === 'low'
         }"
         cdkDrag
+        (cdkDragStarted)="dragging()"
+        (cdkDragReleased)="released()"
+        (click)="onEdit('codeReview', item, i)"
       >
         {{ item.task }}
       </div>
@@ -111,13 +161,16 @@
     >
       <div
         class="box"
-        *ngFor="let item of inTest"
+        *ngFor="let item of inTest; let i = index"
         [ngClass]="{
           high: item.priority === 'high',
           med: item.priority === 'med',
           low: item.priority === 'low'
         }"
         cdkDrag
+        (cdkDragStarted)="dragging()"
+        (cdkDragReleased)="released()"
+        (click)="onEdit('inTest', item, i)"
       >
         {{ item.task }}
       </div>
@@ -135,13 +188,16 @@
     >
       <div
         class="box"
-        *ngFor="let item of done"
+        *ngFor="let item of done; let i = index"
         [ngClass]="{
           high: item.priority === 'high',
           med: item.priority === 'med',
           low: item.priority === 'low'
         }"
         cdkDrag
+        (cdkDragStarted)="dragging()"
+        (cdkDragReleased)="released()"
+        (click)="onEdit('done', item, i)"
       >
         {{ item.task }}
       </div>
