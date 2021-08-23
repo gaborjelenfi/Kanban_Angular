@@ -26,7 +26,7 @@ export class TableComponent implements OnInit {
   isEditMode = false;
   isDragging = false;
 
-
+// Dummy data for demo purpose
   trash: Task[] = [];
   backLog: Task[] = [];
   inProgress: Task[] = [
@@ -45,6 +45,7 @@ export class TableComponent implements OnInit {
 
   ngOnInit(): void {}
 
+
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
@@ -62,11 +63,13 @@ export class TableComponent implements OnInit {
     }
   }
 
+// Create new task when submit the form
   onSubmit() {
     const task: Task = {
       task: this.controlForm.value.task,
       priority: this.controlForm.value.priority,
     };
+    // If is edit mode is true, update the selected element
     if (this.isEditMode) {
       switch (this.selectedArray) {
         case 'backLog':
@@ -94,12 +97,14 @@ export class TableComponent implements OnInit {
       this.isEditMode = false;
     }
 
+  // Reseting the form
     onReset() {
       this.radio = null;
       this.controlForm.resetForm();
       this.isEditMode = false;
     }
 
+  // Activate the edit mode
     onEdit(nameOfArray: string, item: Task, index: number) {
       this.isEditMode = true;
       this.selectedArray = nameOfArray;
