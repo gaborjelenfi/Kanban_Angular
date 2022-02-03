@@ -2,6 +2,8 @@
 
 ### Live demo: <a href="https://dzsub-kanban.surge.sh/" target="_blank">Kanban</a>
 
+### This app focusing on Angular Material UI.
+
 The app using dummy data for the demo. Added data not saving on browers refresh, this is an MVP.
 
 ## Used Stack
@@ -39,10 +41,4 @@ Or **Cancel** button for cancel any changes.
 
 When you **draging** an item, on the buttom left corner, a red box will appear with ``` Drop here to Delete ``` text.
 To delete an item just simply drop inside the red box.
-
-
-
-
-
-
 
